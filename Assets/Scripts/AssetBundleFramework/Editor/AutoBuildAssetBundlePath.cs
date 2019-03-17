@@ -38,7 +38,7 @@ namespace AssetBundleFramework
             //清理无用的AB包名
             AssetDatabase.RemoveUnusedAssetBundleNames();
             //资源根目录
-            assetBundleResRoot = AssetBundleConst.assetBundelResourcesRoot;
+            assetBundleResRoot = PathTool.assetBundelResourcesRoot;
             //获取二级目录信息
             DirectoryInfo tempDirInfo = new DirectoryInfo(assetBundleResRoot);
             sceneDirArray = tempDirInfo.GetDirectories();
