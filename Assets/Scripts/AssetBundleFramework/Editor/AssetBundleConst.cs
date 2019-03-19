@@ -21,8 +21,9 @@ namespace AssetBundleFramework
     public class AssetBundleConst
     {
         private static string outPutPath = string.Empty;
-        public static string assetBundelResourcesRoot = Application.dataPath + "/" + "AssetBundelResources";
+        public static string assetBundelResourcesRoot = Application.dataPath + "/" + "AssetBundleResources";
         public static BuildTarget buildTarget = BuildTarget.StandaloneWindows64;
+        public static string ImagesDir = "Assets/AssetBundleResources/UI/Images";
 
         public static string OutPutPath
         {

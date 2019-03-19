@@ -1,0 +1,14 @@
+ManifestFileVersion: 0
+CRC: 1299180353
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: baf67be10aedc2916cd0794b28b18719
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 31d6cfe0d16ae931b73c59d7e0c089c0
+HashAppended: 0
+ClassTypes: []
+Assets:
+- Assets/AssetBundelResources/CommonScene/main.unity
+Dependencies: []

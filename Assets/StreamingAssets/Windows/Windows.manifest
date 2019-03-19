@@ -1,0 +1,13 @@
+ManifestFileVersion: 0
+CRC: 4277073194
+AssetBundleManifest:
+  AssetBundleInfos:
+    Info_0:
+      Name: commonscene/main.unity.u3dscene
+      Dependencies: {}
+    Info_1:
+      Name: commonscene/textures.u3dassetbundle
+      Dependencies: {}
+    Info_2:
+      Name: commonscene/textures/texture1.u3dassetbundle
+      Dependencies: {}

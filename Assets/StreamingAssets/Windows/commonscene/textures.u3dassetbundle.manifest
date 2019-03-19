@@ -1,0 +1,19 @@
+ManifestFileVersion: 0
+CRC: 4025032698
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: ac27712c8f89e8572eea7f754f1e3795
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 21f0dc8ebad690f009368069428e0a1a
+HashAppended: 0
+ClassTypes:
+- Class: 28
+  Script: {instanceID: 0}
+- Class: 213
+  Script: {instanceID: 0}
+Assets:
+- Assets/AssetBundelResources/CommonScene/Textures/jackey.png
+- Assets/AssetBundelResources/CommonScene/Textures/2.png
+Dependencies: []
