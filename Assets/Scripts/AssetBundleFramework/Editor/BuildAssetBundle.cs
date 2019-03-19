@@ -28,7 +28,7 @@ namespace AssetBundleFramework {
             string ABOutPath = string.Empty;
 
             //获取“StreamAssets”路径
-            ABOutPath = AssetBundleConst.OutPutPath;
+            ABOutPath = PathTool.OutPutPath;
 
             //判断输出目录文件夹是否存在
             if (!Directory.Exists(ABOutPath)){

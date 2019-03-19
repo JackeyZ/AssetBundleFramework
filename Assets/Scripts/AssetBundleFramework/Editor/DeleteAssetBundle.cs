@@ -26,7 +26,7 @@ namespace AssetBundleFramework
         [MenuItem("AssetBundleTools/DeleteAssetBundle")]
         public static void DelAssetBundle()
         {
-            string needDeletePath = AssetBundleConst.OutPutPath;
+            string needDeletePath = PathTool.OutPutPath;
             if (!string.IsNullOrEmpty(needDeletePath))
             {
                 Directory.Delete(needDeletePath, true); //true表示允许删除非空文件夹
