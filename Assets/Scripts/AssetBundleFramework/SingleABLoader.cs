@@ -19,7 +19,6 @@ namespace AssetBundleFramework
 {
     public class SingleAssetBundle : System.IDisposable
     {
-
         //引用类：资源加载类
         private AssetLoader _AssetLoader;
         //委托：
