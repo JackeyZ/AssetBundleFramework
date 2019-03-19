@@ -28,7 +28,7 @@ namespace AssetBundleFramework
                 return;
 
             string fullPath = fileInfo.FullName.Replace('\\', '/');
-            if (!fullPath.StartsWith(AssetBundleConst.assetBundelResourcesRoot))
+            if (!fullPath.StartsWith(PathTool.assetBundelResourcesRoot))
             {
                 return;
             }
@@ -57,7 +57,7 @@ namespace AssetBundleFramework
             //unity下的操作的路径
             string unityPath = winPath.Replace('\\', '/'); //反斜杠替换成斜杠
                                                            //得到资源类型文件夹后的路径（二级目录相对路径 如：Textures/1.png）
-            int subIndex = unityPath.IndexOf(AssetBundleConst.assetBundelResourcesRoot) + AssetBundleConst.assetBundelResourcesRoot.Length + 1;
+            int subIndex = unityPath.IndexOf(PathTool.assetBundelResourcesRoot) + PathTool.assetBundelResourcesRoot.Length + 1;
             string typePath = unityPath.Substring(subIndex);
             //判断该文件是否在二级目录文件夹下
             if (typePath.Contains("/"))
@@ -106,7 +106,7 @@ namespace AssetBundleFramework
 
         private void ProcessTextureType(TextureImporter textureImporter)
         {
-            if (textureImporter.assetPath.StartsWith(AssetBundleConst.ImagesDir))
+            if (textureImporter.assetPath.StartsWith(PathTool.ImagesDir))
             {
                 textureImporter.textureType = TextureImporterType.Sprite;
             }
@@ -116,14 +116,14 @@ namespace AssetBundleFramework
         {
             if (TextureImporterType.Sprite != textureImporter.textureType
                 || textureImporter.assetPath.Contains("/nopack")
-                || !textureImporter.assetPath.StartsWith(AssetBundleConst.ImagesDir))
+                || !textureImporter.assetPath.StartsWith(PathTool.ImagesDir))
             {
                 textureImporter.spritePackingTag = string.Empty;
                 return;
             }
 
-            int subIndex = textureImporter.assetPath.IndexOf(AssetBundleConst.ImagesDir);
-            string pack_tag = textureImporter.assetPath.Substring(subIndex + AssetBundleConst.ImagesDir.Length);
+            int subIndex = textureImporter.assetPath.IndexOf(PathTool.ImagesDir);
+            string pack_tag = textureImporter.assetPath.Substring(subIndex + PathTool.ImagesDir.Length);
             pack_tag = "image" + pack_tag.Substring(0, pack_tag.LastIndexOf("/")).ToLower();
             textureImporter.spritePackingTag = pack_tag;
         }
