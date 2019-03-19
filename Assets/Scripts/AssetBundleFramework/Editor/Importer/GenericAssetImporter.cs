@@ -12,14 +12,22 @@ namespace AssetBundleFramework
             foreach (var importedAsset in importedAssets)
             {
                 MarkAssetBundlePath(importedAsset);
+                ProcessTextureType(importedAsset);
+                ProcessPackingTag(importedAsset);
             }
 
             foreach (var movedAsset in movedAssets)
             {
                 MarkAssetBundlePath(movedAsset);
+                ProcessTextureType(movedAsset);
+                ProcessPackingTag(movedAsset);
             }
         }
 
+        /// <summary>
+        /// 标记ab包路径
+        /// </summary>
+        /// <param name="assetPath"></param>
         private static void MarkAssetBundlePath(string assetPath)
         {
             FileInfo fileInfo = new FileInfo(assetPath);
@@ -34,11 +42,9 @@ namespace AssetBundleFramework
             }
             //得到AB包名称
             string assetBundleName = CalculationAssetBundleName(fileInfo);
-            //得到资源文件的相对路径
-            int tmpIndex = fileInfo.FullName.IndexOf("Assets");
-            string relativePath = fileInfo.FullName.Substring(tmpIndex);
+           
             //设置AB包名和扩展名
-            AssetImporter assetImporter = AssetImporter.GetAtPath(relativePath);
+            AssetImporter assetImporter = AssetImporter.GetAtPath(assetPath);
             assetImporter.assetBundleName = assetBundleName;
             if (fileInfo.Extension == ".unity")
             {
@@ -49,6 +55,11 @@ namespace AssetBundleFramework
                 assetImporter.assetBundleVariant = "u3dAssetBundle";
             }
         }
+        /// <summary>
+        /// 计算AB包路径名
+        /// </summary>
+        /// <param name="fileinfo"></param>
+        /// <returns></returns>
         private static string CalculationAssetBundleName(FileInfo fileinfo)
         {
             string assetBundleName = string.Empty;
@@ -59,7 +70,7 @@ namespace AssetBundleFramework
                                                            //得到资源类型文件夹后的路径（二级目录相对路径 如：Textures/1.png）
             int subIndex = unityPath.IndexOf(PathTool.assetBundelResourcesRoot) + PathTool.assetBundelResourcesRoot.Length + 1;
             string typePath = unityPath.Substring(subIndex);
-            //判断该文件是否在二级目录文件夹下
+            //判断该文件是否不在一级目录
             if (typePath.Contains("/"))
             {
                 assetBundleName = typePath.Substring(0, typePath.LastIndexOf("/"));
@@ -72,50 +83,40 @@ namespace AssetBundleFramework
 
             return assetBundleName;
         }
-
-        private void OnPreprocessTexture()
+        
+        /// <summary>
+        /// 设置资源类型为sprite
+        /// </summary>
+        /// <param name="assetPath"></param>
+        static private void ProcessTextureType(string assetPath)
         {
-            Debug.LogError("32423");
-            TextureImporter textureImporter = (TextureImporter)assetImporter;
-            if (HideFlags.NotEditable == textureImporter.hideFlags)
+            AssetImporter assetImporter = AssetImporter.GetAtPath(assetPath);
+            // 判断资源类型
+            if (!(assetImporter is TextureImporter))
             {
                 return;
             }
-
-            ProcessTextureType(textureImporter);
-            ProcessPackingTag(textureImporter);
-            //ProcessMipmap(textureImporter);
-            //ProcessReadable(textureImporter, asset);
-            //ProcessFilterMode(textureImporter);
-            //ProcessScenePlatformSetting(textureImporter);
-            //ProcessCompression(textureImporter);
-            //ProcessRawImage(textureImporter, asset);
-        }
-
-        private void OnPostprocessTexture(Texture2D texture)
-        {
-            TextureImporter textureImporter = (TextureImporter)assetImporter;
-            Debug.LogError("3345345");
-            //if (tempIgnoreAssets.Contains(assetImporter.assetPath))
-            //{
-            //    return;
-            //}
-
-            //ProcessResizeTextureToMutiple4(textureImporter, texture);
-        }
-
-        private void ProcessTextureType(TextureImporter textureImporter)
-        {
+            TextureImporter textureImporter = assetImporter as TextureImporter;
             if (textureImporter.assetPath.StartsWith(PathTool.ImagesDir))
             {
                 textureImporter.textureType = TextureImporterType.Sprite;
             }
         }
 
-        private void ProcessPackingTag(TextureImporter textureImporter)
+        /// <summary>
+        /// 设置图集打包tag
+        /// </summary>
+        /// <param name="assetPath"></param>
+        static  private void ProcessPackingTag(string assetPath)
         {
-            if (TextureImporterType.Sprite != textureImporter.textureType
-                || textureImporter.assetPath.Contains("/nopack")
+            AssetImporter assetImporter = AssetImporter.GetAtPath(assetPath);
+            // 判断资源类型
+            if (!(assetImporter is TextureImporter))
+            {
+                return;
+            }
+            TextureImporter textureImporter = assetImporter as TextureImporter;
+            if (textureImporter.assetPath.Contains("/nopack")
                 || !textureImporter.assetPath.StartsWith(PathTool.ImagesDir))
             {
                 textureImporter.spritePackingTag = string.Empty;
@@ -127,6 +128,5 @@ namespace AssetBundleFramework
             pack_tag = "image" + pack_tag.Substring(0, pack_tag.LastIndexOf("/")).ToLower();
             textureImporter.spritePackingTag = pack_tag;
         }
-
     }
 }

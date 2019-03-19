@@ -68,7 +68,7 @@ TextureImporter:
     sprites: []
     outline: []
     physicsShape: []
-  spritePackingTag: image
+  spritePackingTag: image/playerview
   userData: 
   assetBundleName: ui/images
   assetBundleVariant: u3dassetbundle
