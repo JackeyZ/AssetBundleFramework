@@ -1,8 +1,8 @@
 ﻿/*
-*Title:""项目开发
+*Title:"AssetBundle框架"项目开发
 *
 *Description:
-*	[描述]
+*	定义assetbundle框架Editor内的常量或静态变量
 *
 *Date:2017
 *

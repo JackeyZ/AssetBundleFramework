@@ -17,15 +17,14 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Networking;
 
-public delegate void LoadCallback();
 namespace AssetBundleFramework
 {
-    public class SingleAssetBundle : System.IDisposable
+    public class SingleABLoader : System.IDisposable
     {
         //引用类：资源加载类
         private AssetLoader _AssetLoader;
         //委托：
-        LoadCallback _LoadCallback;
+        DelLoadComplete _LoadCallback;
         
         //AssetBundle 名称
         private string _ABName;
@@ -34,7 +33,7 @@ namespace AssetBundleFramework
         private string _ABDownLoadPath;
 
         //构造函数
-        public SingleAssetBundle(string abName, LoadCallback loadCallback)
+        public SingleABLoader(string abName, DelLoadComplete loadCallback)
         {
             _ABName = abName;
             //委托定义
@@ -52,10 +51,15 @@ namespace AssetBundleFramework
             //AssetBundle ab_prefab = DownloadHandlerAssetBundle.GetContent(request);
             //取得ab的方式2
             AssetBundle ab_prefab = (request.downloadHandler as DownloadHandlerAssetBundle).assetBundle;
+            if(ab_prefab == null)
+            {
+                Debug.LogError(GetType() + "LoadAssetBundle失败：" + _ABDownLoadPath);
+                yield return null;
+            }
             _AssetLoader = new AssetLoader(ab_prefab);
             if(_LoadCallback != null)
             {
-                _LoadCallback();
+                _LoadCallback(_ABName);
             }
         }
 
@@ -65,7 +69,7 @@ namespace AssetBundleFramework
         /// <param name="assetName"></param>
         /// <param name="isCache"></param>
         /// <returns></returns>
-        public UnityEngine.Object LoadAsset(string assetName, bool isCache)
+        public UnityEngine.Object LoadAsset(string assetName, bool isCache = false)
         {
             if (_AssetLoader != null) { 
                 return _AssetLoader.LoadAsset(assetName, isCache);
@@ -75,11 +79,66 @@ namespace AssetBundleFramework
         }
 
         /// <summary>
+        /// 卸载ab资源
+        /// </summary>
+        /// <param name="asset"></param>
+        public void UnLoadAsset(UnityEngine.Object asset)
+        {
+            if(_AssetLoader != null)
+            {
+                _AssetLoader.UnLoadAsset(asset);
+            }
+            else
+            {
+                Debug.LogError(GetType() + "：_AssetLoader is null");
+            }
+        }
+
+        /// <summary>
         /// 释放资源
         /// </summary>
         public void Dispose()
         {
+            if (_AssetLoader != null)
+            {
+                _AssetLoader.Dispose();
+                _AssetLoader = null;
+            }
+            else
+            {
+                Debug.LogError(GetType() + "：_AssetLoader is null");
+            }
+        }
 
+        /// <summary>
+        /// 释放所有资源
+        /// </summary>
+        public void DisposeAll()
+        {
+            if (_AssetLoader != null)
+            {
+                Debug.LogError("DisposeAll");
+                _AssetLoader.DisposeAll();
+                _AssetLoader = null;
+            }
+            else
+            {
+                Debug.LogError(GetType() + "：_AssetLoader is null");
+            }
+        }
+
+        /// <summary>
+        /// 查询AB包中的所有资源
+        /// </summary>
+        /// <returns></returns>
+        public string[] RetriveAllAssetName()
+        {
+            if (_AssetLoader != null)
+            {
+                return _AssetLoader.RetriveAllAssetName();
+            }
+            Debug.LogError(GetType() + "：_AssetLoader is null");
+            return null;
         }
     }
 

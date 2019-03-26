@@ -83,27 +83,45 @@ public class AssetLoader : System.IDisposable {
         return tmpTResource;
     }
 
-    //检查某个资源是否已经卸载了
-    public bool AssetIsUnLoad(UnityEngine.Object asset)
+
+    /// <summary>
+    /// 卸载指定的资源
+    /// </summary>
+    /// <param name="asset">资源名称</param>
+    /// <returns></returns>
+    public bool UnLoadAsset(UnityEngine.Object asset)
     {
+        if (asset != null)
+        {
+            Resources.UnloadAsset(asset);
+            return true;
+        }
+        Debug.LogError(GetType() + "/UnLoadAsset()/参数 asset==null ,请检查！");
         return false;
     }
 
-    //卸载当前Assetbundle内存镜像资源
+    /// <summary>
+    /// 释放当前AssetBundle内存镜像资源
+    /// </summary>
     public void Dispose()
     {
-        throw new NotImplementedException();
+        _CurrentAssetBundle.Unload(false);
     }
 
-    //释放当前Assetbundle内存镜像资源和内存资源
+    /// <summary>
+    /// 释放当前AssetBundle内存镜像资源,且释放内存资源。
+    /// </summary>
     public void DisposeAll()
     {
-
+        _CurrentAssetBundle.Unload(true);
     }
 
-    //查询当前AB包中的所有资源
-    public void CheckAssetbundleAllAsset()
+    /// <summary>
+    /// 查询当前AssetBundle中包含的所有资源名称。
+    /// </summary>
+    /// <returns></returns>
+    public string[] RetriveAllAssetName()
     {
-
+        return _CurrentAssetBundle.GetAllAssetNames();
     }
 }

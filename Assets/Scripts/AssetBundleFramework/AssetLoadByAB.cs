@@ -1,7 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+#if UNITY_EDITOR_WIN
 using UnityEditor;
+#endif
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -17,6 +19,7 @@ public class AssetLoadByAB {
         return (T)null;
     }
 
+#if UNITY_EDITOR_WIN
     /// <summary>
     /// 根据ab路径和资源名称返回资源路径（Assets/...）
     /// </summary>
@@ -45,4 +48,5 @@ public class AssetLoadByAB {
         }
         return null;
     }
+#endif
 }
