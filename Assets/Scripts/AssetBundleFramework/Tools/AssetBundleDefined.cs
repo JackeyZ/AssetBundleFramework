@@ -26,6 +26,6 @@ namespace AssetBundleFramework
     public class AssetBundleDefined
     {
         /*常量定义区*/
-
+        public const string ASSETBUNDLE_MANIFEST_STR = "AssetBundleManifest";
     }
 }
