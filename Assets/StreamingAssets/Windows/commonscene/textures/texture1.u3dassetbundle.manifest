@@ -1,0 +1,18 @@
+ManifestFileVersion: 0
+CRC: 3132741190
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: ab5efb75b2039fd922aa0dca4f429cb8
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: cb3f6df5cbc4a2990c44c2787bc9553a
+HashAppended: 0
+ClassTypes:
+- Class: 28
+  Script: {instanceID: 0}
+- Class: 213
+  Script: {instanceID: 0}
+Assets:
+- Assets/AssetBundleResources/CommonScene/Textures/Texture1/1.png
+Dependencies: []

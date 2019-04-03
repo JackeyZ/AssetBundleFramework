@@ -2,7 +2,7 @@
 *Title:"AssetBundle框架"项目开发
 *
 *Description:
-*	控制ab包之间的依赖关系
+*	用于存储给定ab包的依赖关系
 *       储存指定AB包的所有依赖关系包
 *       储存指定AB包的所有引用关系包
 *
@@ -78,7 +78,7 @@ public class ABRelation : MonoBehaviour {
     /// </summary>
     /// <param name="abName">AB包名称</param>
     /// <returns>true：增加依赖关系成功，false：依赖关系已存在</returns>
-    public bool AddReferencee(string abName)
+    public bool AddReference(string abName)
     {
         if (!_LisAllReferenceAB.Contains(abName))
         {

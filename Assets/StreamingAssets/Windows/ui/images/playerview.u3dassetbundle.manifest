@@ -1,0 +1,92 @@
+ManifestFileVersion: 0
+CRC: 3922273490
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 431d748299d7e755a81ebe38bc9acbc9
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 8d614ba2bf78fe185c64b512c1591e5d
+HashAppended: 0
+ClassTypes:
+- Class: 28
+  Script: {instanceID: 0}
+- Class: 213
+  Script: {instanceID: 0}
+- Class: 687078895
+  Script: {instanceID: 0}
+Assets:
+- Assets/AssetBundleResources/UI/Images/PlayerView/icon_voice.png
+- Assets/AssetBundleResources/UI/Images/PlayerView/2.png
+- Assets/AssetBundleResources/UI/Images/PlayerView/advance_icon_1000.png
+- Assets/AssetBundleResources/UI/Images/PlayerView/arrow.png
+- Assets/AssetBundleResources/UI/Images/PlayerView/SpriteAtlas.spriteatlas
+- Assets/AssetBundleResources/UI/Images/PlayerView/icon_voice2.png
+- Assets/AssetBundleResources/UI/Images/PlayerView/jindutiao_bg.png
+- Assets/AssetBundleResources/UI/Images/PlayerView/rich_new_btn.png
+- Assets/AssetBundleResources/UI/Images/PlayerView/bubble_2_right.png
+- Assets/AssetBundleResources/UI/Images/PlayerView/icon_chat_pawn.png
+- Assets/AssetBundleResources/UI/Images/PlayerView/icon_btn_black.png
+- Assets/AssetBundleResources/UI/Images/PlayerView/lbl_bg_6.png
+- Assets/AssetBundleResources/UI/Images/PlayerView/button_icon.png
+- Assets/AssetBundleResources/UI/Images/PlayerView/point_bg.png
+- Assets/AssetBundleResources/UI/Images/PlayerView/head_bg.png
+- Assets/AssetBundleResources/UI/Images/PlayerView/lbl_bg_8.png
+- Assets/AssetBundleResources/UI/Images/PlayerView/head_icon_1000.png
+- Assets/AssetBundleResources/UI/Images/PlayerView/icon_btn_pos2.png
+- Assets/AssetBundleResources/UI/Images/PlayerView/Icon1.png
+- Assets/AssetBundleResources/UI/Images/PlayerView/big_face_text1.png
+- Assets/AssetBundleResources/UI/Images/PlayerView/icon_xuanku_bg.png
+- Assets/AssetBundleResources/UI/Images/PlayerView/icon_avtar_guild.png
+- Assets/AssetBundleResources/UI/Images/PlayerView/right_bg.png
+- Assets/AssetBundleResources/UI/Images/PlayerView/guild_hong_bao.png
+- Assets/AssetBundleResources/UI/Images/PlayerView/big_face_text2.png
+- Assets/AssetBundleResources/UI/Images/PlayerView/lbl_bg_4.png
+- Assets/AssetBundleResources/UI/Images/PlayerView/rich_btn.png
+- Assets/AssetBundleResources/UI/Images/PlayerView/icon_avtar_team.png
+- Assets/AssetBundleResources/UI/Images/PlayerView/btn_a.png
+- Assets/AssetBundleResources/UI/Images/PlayerView/close.png
+- Assets/AssetBundleResources/UI/Images/PlayerView/icon_btn_emoji.png
+- Assets/AssetBundleResources/UI/Images/PlayerView/img9_bg_113.png
+- Assets/AssetBundleResources/UI/Images/PlayerView/gold_chat_text.png
+- Assets/AssetBundleResources/UI/Images/PlayerView/role_head_bg.png
+- Assets/AssetBundleResources/UI/Images/PlayerView/bg_liaotian.png
+- Assets/AssetBundleResources/UI/Images/PlayerView/gold_text_lock_6.png
+- Assets/AssetBundleResources/UI/Images/PlayerView/icon_laba_kuafu.png
+- Assets/AssetBundleResources/UI/Images/PlayerView/lbl_bg_9.png
+- Assets/AssetBundleResources/UI/Images/PlayerView/bg_mirror_10.png
+- Assets/AssetBundleResources/UI/Images/PlayerView/lbl_bg_100.png
+- Assets/AssetBundleResources/UI/Images/PlayerView/icon_btn_pos.png
+- Assets/AssetBundleResources/UI/Images/PlayerView/icon_btn_show_equip.png
+- Assets/AssetBundleResources/UI/Images/PlayerView/img9_02.png
+- Assets/AssetBundleResources/UI/Images/PlayerView/img9_01.png
+- Assets/AssetBundleResources/UI/Images/PlayerView/icon_btn_pw_hongbao.png
+- Assets/AssetBundleResources/UI/Images/PlayerView/chat_line.png
+- Assets/AssetBundleResources/UI/Images/PlayerView/bg_101.png
+- Assets/AssetBundleResources/UI/Images/PlayerView/icon_btn_bag.png
+- Assets/AssetBundleResources/UI/Images/PlayerView/jindutiao.png
+- Assets/AssetBundleResources/UI/Images/PlayerView/tab_btn.png
+- Assets/AssetBundleResources/UI/Images/PlayerView/icon_avtar_camp.png
+- Assets/AssetBundleResources/UI/Images/PlayerView/img9_106.png
+- Assets/AssetBundleResources/UI/Images/PlayerView/icon_btn_normal.png
+- Assets/AssetBundleResources/UI/Images/PlayerView/btn_send_msg.png
+- Assets/AssetBundleResources/UI/Images/PlayerView/icon_btn_laba.png
+- Assets/AssetBundleResources/UI/Images/PlayerView/icon_setting.png
+- Assets/AssetBundleResources/UI/Images/PlayerView/btn_d.png
+- Assets/AssetBundleResources/UI/Images/PlayerView/lbl_bg_3.png
+- Assets/AssetBundleResources/UI/Images/PlayerView/lbl_bg_1.png
+- Assets/AssetBundleResources/UI/Images/PlayerView/bg_mirror_goldchat.png
+- Assets/AssetBundleResources/UI/Images/PlayerView/btn_b.png
+- Assets/AssetBundleResources/UI/Images/PlayerView/icon_qiandao.png
+- Assets/AssetBundleResources/UI/Images/PlayerView/icon_btn_mail.png
+- Assets/AssetBundleResources/UI/Images/PlayerView/bg_mirror_09.png
+- Assets/AssetBundleResources/UI/Images/PlayerView/icon_btn_bag2.png
+- Assets/AssetBundleResources/UI/Images/PlayerView/lbl_bg_0.png
+- Assets/AssetBundleResources/UI/Images/PlayerView/chat_bg.png
+- Assets/AssetBundleResources/UI/Images/PlayerView/icon_btn_mails.png
+- Assets/AssetBundleResources/UI/Images/PlayerView/icon_btn_special_select.png
+- Assets/AssetBundleResources/UI/Images/PlayerView/Icon2.png
+- Assets/AssetBundleResources/UI/Images/PlayerView/btn_c.png
+- Assets/AssetBundleResources/UI/Images/PlayerView/img9_105.png
+- Assets/AssetBundleResources/UI/Images/PlayerView/img9_voice_bg.png
+Dependencies: []

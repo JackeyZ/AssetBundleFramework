@@ -2,6 +2,7 @@
 using System.Collections;
 using UnityEngine.Video;
 using UnityEngine.UI;
+using UnityEditor;
 
 public class Movie : MonoBehaviour
 {
@@ -30,11 +31,11 @@ public class Movie : MonoBehaviour
         videoPlayer = gameObject.AddComponent<VideoPlayer>();
 
         //Add AudioSource
-        audioSource = gameObject.AddComponent<AudioSource>();
+        //audioSource = gameObject.AddComponent<AudioSource>();
 
         //Disable Play on Awake for both Video and Audio
         videoPlayer.playOnAwake = false;
-        audioSource.playOnAwake = false;
+        //audioSource.playOnAwake = false;
 
         //We want to play from video clip not from url
         videoPlayer.source = VideoSource.VideoClip;
@@ -45,11 +46,11 @@ public class Movie : MonoBehaviour
         //Debug.Log("Done Preparing Video");
 
         //Set Audio Output to AudioSource
-        videoPlayer.audioOutputMode = VideoAudioOutputMode.AudioSource;
+        videoPlayer.audioOutputMode = VideoAudioOutputMode.Direct;//VideoAudioOutputMode.AudioSource;
 
         //Assign the Audio from Video to AudioSource to be played
-        videoPlayer.EnableAudioTrack(0, true);
-        videoPlayer.SetTargetAudioSource(0, audioSource);
+        //videoPlayer.EnableAudioTrack(0, true);
+        //videoPlayer.SetTargetAudioSource(0, audioSource);
 
 
         //Google到的解决方案
@@ -69,7 +70,7 @@ public class Movie : MonoBehaviour
         videoPlayer.Play();
 
         //Play Sound
-        audioSource.Play();
+        //audioSource.Play();
 
         //Debug.Log("Playing Video");
         while (videoPlayer.isPlaying)

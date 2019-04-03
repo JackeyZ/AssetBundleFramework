@@ -2,11 +2,13 @@
 *Title:"Assetbundle框架"项目开发
 *
 *Description:
-*   名称：AB资源加载类
-*	    1、加载与管理AB资源
-*	    2、加载具有“缓存功能”的资源，带选用参数
-*       3、卸载、释放AB资源
-*       4、查看当前AB资源
+*   名称：AB包内资源的加载类
+*   作用：控制给定AB包内资源的加载、释放、缓存、查询
+*	        1、加载与管理AB资源
+*	        2、加载具有“缓存功能”的资源，带选用参数
+*           3、卸载、释放AB资源
+*           4、查看当前AB资源
+*   用法：利用其他类加载完AB包之后赋值给该类对象，利用该类对资源进行管理
 *Date:2019
 *
 *Version:0.1
@@ -49,7 +51,7 @@ public class AssetLoader : System.IDisposable {
     /// <param name="assetName">资源名</param>
     /// <param name="isCache">是否开启缓存</param>
     /// <returns></returns>
-    public UnityEngine.Object LoadAsset(string assetName, bool isCache = false)
+    public UnityEngine.Object LoadAsset(string assetName, bool isCache = true)
     {
         return LoadResource<UnityEngine.Object>(assetName, isCache);
     }
@@ -61,7 +63,7 @@ public class AssetLoader : System.IDisposable {
     /// <param name="assetName">资源名称</param>
     /// <param name="isCache">是否需要缓存</param>
     /// <returns>加载的资源</returns>
-    private T LoadResource<T>(string assetName, bool isCache = false) where T : UnityEngine.Object
+    private T LoadResource<T>(string assetName, bool isCache = true) where T : UnityEngine.Object
     {
         //缓存集合是否已经存在
         if (_Ht.Contains(assetName))

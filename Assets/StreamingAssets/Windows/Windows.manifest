@@ -1,0 +1,29 @@
+ManifestFileVersion: 0
+CRC: 1282122553
+AssetBundleManifest:
+  AssetBundleInfos:
+    Info_0:
+      Name: commonscene/textures.u3dassetbundle
+      Dependencies: {}
+    Info_1:
+      Name: commonscene/textures/texture1.u3dassetbundle
+      Dependencies: {}
+    Info_2:
+      Name: ui/images.u3dassetbundle
+      Dependencies: {}
+    Info_3:
+      Name: commonscene.u3dscene
+      Dependencies: {}
+    Info_4:
+      Name: ui/images/playerview.u3dassetbundle
+      Dependencies: {}
+    Info_5:
+      Name: commonscene/materials.u3dassetbundle
+      Dependencies: {}
+    Info_6:
+      Name: commonscene/prefabs.u3dassetbundle
+      Dependencies:
+        Dependency_0: commonscene/materials.u3dassetbundle
+    Info_7:
+      Name: ui/images/nopack.u3dassetbundle
+      Dependencies: {}

@@ -2,7 +2,7 @@
 *Title:"Assetbundle框架"项目开发
 *
 *Description:
-*   用于AB包依赖清单的加载
+*   用于AB包依赖清单的加载（加载主清单，记录着每个AB包之间的依赖关系）
 *
 *Date:2019
 *
@@ -19,17 +19,17 @@ namespace AssetBundleFramework
 {
     public class ABManifestLoader : Singleton<ABManifestLoader>, System.IDisposable
     {
-        private AssetBundleManifest _manifest;
+        private AssetBundleManifest _manifest;      //主清单
         private AssetBundle _manifestBundle;
-        private string _loadPath;           //加载路径
-        private bool _isLoadFinish;         //是否加载完成
+        private string _loadPath;                   //主清单所在路径
+        private bool _isLoadFinish;                 //是否加载完成
 
         public bool IsLoadFinish{ get { return _isLoadFinish; } }
 
         public ABManifestLoader()
         {
             _manifest = null;
-            _loadPath = PathTool.GetWWWPath();
+            _loadPath = PathTool.GetWWWPath() + "/" + PathTool.GetPlatformName();
             _isLoadFinish = false;
         }
 
@@ -39,9 +39,9 @@ namespace AssetBundleFramework
         /// <returns></returns>
         public IEnumerator ManifestLoad()
         {
-            UnityWebRequest request = UnityWebRequest.GetAssetBundle(_loadPath);
-            yield return request.Send();
-            AssetBundle _manifestBundle = (request.downloadHandler as DownloadHandlerAssetBundle).assetBundle;
+            UnityWebRequest request = UnityWebRequestAssetBundle.GetAssetBundle(_loadPath);
+            yield return request.SendWebRequest();
+            _manifestBundle = (request.downloadHandler as DownloadHandlerAssetBundle).assetBundle;
             if (_manifestBundle == null)
             {
                 Debug.LogError(GetType() + "读取manifest失败：" + _loadPath);
@@ -49,10 +49,6 @@ namespace AssetBundleFramework
             }
             _manifest = _manifestBundle.LoadAsset(AssetBundleDefined.ASSETBUNDLE_MANIFEST_STR) as AssetBundleManifest;
             _isLoadFinish = true;
-            //if (_LoadCallback != null)
-            //{
-            //    _LoadCallback(_ABName);
-            //}
         }
 
         public AssetBundleManifest GetManifest()
