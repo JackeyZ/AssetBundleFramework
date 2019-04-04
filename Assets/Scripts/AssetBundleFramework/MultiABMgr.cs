@@ -30,39 +30,45 @@ namespace AssetBundleFramework
         // AB包对应的依赖-引用关系集合，同时可用于判断AB包是否已经加载
         private Dictionary<string, ABRelation> _DicABRelation;
         // 所有AB包是否加载完成
-        private Dictionary<string, DelLoadComplete> _LoadAllAssetBundleCompleteList;
+        private Dictionary<string, Action<string>> _LoadAllAssetBundleCompleteList;
 
         public MultiABMgr(string abName)
         {
             _CurrentABName = abName;
             _DicSingleABLoaderCache = new Dictionary<string, SingleABLoader>();
             _DicABRelation = new Dictionary<string, ABRelation>();
-            _LoadAllAssetBundleCompleteList = new Dictionary<string, DelLoadComplete>();
+            _LoadAllAssetBundleCompleteList = new Dictionary<string, Action<string>>();
         }
 
         public void CompleteLoadAB(string abName)
         {
             if (_LoadAllAssetBundleCompleteList.ContainsKey(abName))    // 是否有需要回调的函数（目标AB包才会有，一般情况下依赖包不会有所需回调的函数,除非依赖包恰好是目标包）
             {
-                Debug.LogError(abName);
+                Debug.Log(abName + "，加载完毕");
                 _LoadAllAssetBundleCompleteList[abName](abName);
                 ClearLoadCallBack(abName);
             }
         }
 
-        public IEnumerator LoadAssetBundle(string abName, DelLoadComplete loadCallback = null)
+        /// <summary>
+        /// 外部调用， 加载目标AB包
+        /// </summary>
+        /// <param name="abName"></param>
+        /// <param name="loadCallback"></param>
+        /// <returns></returns>
+        public IEnumerator LoadAssetBundle(string abName, Action<string> loadCallback)
         {
-            if(loadCallback != null)
-            {
-                if (_LoadAllAssetBundleCompleteList.ContainsKey(abName))
-                {
-                    _LoadAllAssetBundleCompleteList[abName] += loadCallback;
-                }
-                else
-                {
-                    _LoadAllAssetBundleCompleteList.Add(abName, loadCallback);
-                }
-            }
+            AddLoadCallBack(abName, loadCallback);
+            yield return LoadAssetBundle(abName);
+        }
+
+        /// <summary>
+        /// 内部调用, 加载AB包
+        /// </summary>
+        /// <param name="abName"></param>
+        /// <returns></returns>
+        private IEnumerator LoadAssetBundle(string abName)
+        {
             // AB包关系的建立
             if (!_DicABRelation.ContainsKey(abName))
             {
@@ -140,9 +146,56 @@ namespace AssetBundleFramework
             return null;
         }
 
-        public bool ContainsAssetBundle(string abName)
+        /// <summary>
+        /// 指定AB包是否已经加载完毕
+        /// </summary>
+        /// <param name="abName"></param>
+        /// <returns></returns>
+        public bool AssetBundleIsLoaded(string abName)
         {
-            return _DicSingleABLoaderCache.ContainsKey(abName);
+            return _DicSingleABLoaderCache.ContainsKey(abName) && _DicSingleABLoaderCache[abName].Loaded;
+        }
+        /// <summary>
+        /// 指定AB包是否正在加载中
+        /// </summary>
+        /// <param name="abName"></param>
+        /// <returns></returns>
+        public bool AssetBundleIsLoading(string abName)
+        {
+            return _DicSingleABLoaderCache.ContainsKey(abName) && _DicSingleABLoaderCache[abName].Loading;
+        }
+
+        /// <summary>
+        /// 设置目标AB包加载完毕回调
+        /// </summary>
+        /// <param name="abName"></param>
+        /// <param name="loadCallback"></param>
+        public void AddLoadCallBack(string abName, Action<string> loadCallback)
+        {
+            if (loadCallback != null)
+            {
+                if (_LoadAllAssetBundleCompleteList.ContainsKey(abName))
+                {
+                    _LoadAllAssetBundleCompleteList[abName] += loadCallback;
+                }
+                else
+                {
+                    _LoadAllAssetBundleCompleteList.Add(abName, loadCallback);
+                }
+            }
+        }
+
+        /// <summary>
+        /// 内部调用，清掉刚调用完毕的回调函数
+        /// </summary>
+        /// <param name="abName"></param>
+        private void ClearLoadCallBack(string abName)
+        {
+            Delegate[] delArray = _LoadAllAssetBundleCompleteList[abName].GetInvocationList();
+            for (int i = 0; i < delArray.Length; i++)
+            {
+                _LoadAllAssetBundleCompleteList[abName] -= delArray[i] as Action<string>;
+            }
         }
 
         /// <summary>
@@ -173,15 +226,6 @@ namespace AssetBundleFramework
                 Resources.UnloadUnusedAssets();
                 //强制垃圾收集
                 System.GC.Collect();
-            }
-        }
-
-        private void ClearLoadCallBack(string abName)
-        {
-            Delegate[] delArray = _LoadAllAssetBundleCompleteList[abName].GetInvocationList();
-            for (int i = 0; i < delArray.Length; i++)
-            {
-                _LoadAllAssetBundleCompleteList[abName] -= delArray[i] as DelLoadComplete;
             }
         }
     }

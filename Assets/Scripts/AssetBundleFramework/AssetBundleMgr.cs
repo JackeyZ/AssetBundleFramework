@@ -15,6 +15,7 @@
  *   Modify：  
  *
  */
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -57,7 +58,7 @@ namespace AssetBundleFramework
         /// <param name="loadAllCompleteHandle">委托： 下载完成回调</param>
         /// <param name="classify">分类包（类包之间资源应当互不依赖）</param>
         /// <returns></returns>
-        private IEnumerator LoadAssetBundlePack(string abName, DelLoadComplete loadAllCompleteHandle, BundleClassify classify = BundleClassify.Normal)
+        private IEnumerator LoadAssetBundlePack(string abName, Action<string> loadAllCompleteHandle, BundleClassify classify = BundleClassify.Normal)
         {
             //参数检查
             if (string.IsNullOrEmpty(abName))
@@ -123,9 +124,9 @@ namespace AssetBundleFramework
         /// <param name="assetLoadComplete">回调函数</param>
         /// <param name="isCache">是否缓存</param>
         /// <param name="classify">分类包</param>
-        public void LoadBundleAsset(string abName, string assetName, DelAssetLoadComplete assetLoadComplete, bool isCache = true, BundleClassify classify = BundleClassify.Normal)
+        public void LoadBundleAsset(string abName, string assetName, Action<UnityEngine.Object> assetLoadComplete, bool isCache = true, BundleClassify classify = BundleClassify.Normal)
         {
-            DelLoadComplete loadCompleteCallback = delegate (string assetBundleName)            //AB包加载完成的回调
+            Action<string> loadCompleteCallback = delegate (string assetBundleName)            //AB包加载完成的回调
             {
                 LoadBundleAsset(abName, assetName, assetLoadComplete, isCache, classify);
             };
@@ -137,8 +138,13 @@ namespace AssetBundleFramework
             }
 
             MultiABMgr tmpMultiABMgr = _DicAllScenes[classify];
-            if (!tmpMultiABMgr.ContainsAssetBundle(abName))                                     //判断AB包是否已经加载
+            if (!tmpMultiABMgr.AssetBundleIsLoaded(abName))                                       //判断AB包是否已经加载
             {
+                if (tmpMultiABMgr.AssetBundleIsLoading(abName))                                   //判断AB包是否正在加载
+                {
+                    tmpMultiABMgr.AddLoadCallBack(abName, loadCompleteCallback);
+                    return;
+                }
                 StartCoroutine(tmpMultiABMgr.LoadAssetBundle(abName, loadCompleteCallback));    //加载AB包
                 return;
             }

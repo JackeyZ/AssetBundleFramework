@@ -26,7 +26,7 @@ namespace AssetBundleFramework
         //引用类：包内资源加载类
         private AssetLoader _AssetLoader;
         //委托：AB包加载完成之后调用
-        DelLoadComplete _LoadCallback;
+        Action<string> _LoadCallback;
         
         //AssetBundle 名称
         private string _ABName;
@@ -42,13 +42,17 @@ namespace AssetBundleFramework
         /// 是否加载成功
         /// </summary>
         public bool Loaded { get { return _Loaded; } }
+        /// <summary>
+        /// 是否正在加载
+        /// </summary>
+        public bool Loading { get { return _Loading; } }
 
         /// <summary>
         /// 构造函数
         /// </summary>
         /// <param name="abName">AB包名称</param>
         /// <param name="loadCallback">下载完成回调</param>
-        public SingleABLoader(string abName, DelLoadComplete loadCallback)
+        public SingleABLoader(string abName, Action<string> loadCallback)
         {
             _ABName = abName;
             _LoadCallback = loadCallback;
@@ -71,9 +75,9 @@ namespace AssetBundleFramework
                 //AssetBundle ab_prefab = DownloadHandlerAssetBundle.GetContent(request);
                 //取得ab的方式2
                 AssetBundle ab_prefab = (request.downloadHandler as DownloadHandlerAssetBundle).assetBundle;
+                _Loading = false;
                 if (ab_prefab == null)
                 {
-                    _Loading = false;
                     Debug.LogError(GetType() + "LoadAssetBundle失败：" + _ABDownLoadPath);
                     yield return null;
                 }

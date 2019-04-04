@@ -19,7 +19,6 @@ namespace AssetBundleFramework
 {
     /*委托定义区*/
     public delegate void DelLoadComplete(string abName);
-    public delegate void DelAssetLoadComplete(UnityEngine.Object asset);
 
     /*枚举定义区*/
     /// <summary>

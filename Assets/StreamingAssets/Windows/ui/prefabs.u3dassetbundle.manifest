@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 24322980
+CRC: 4206729894
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 851f6d3959fbefe1ce6d97476e0d1a0a
+    Hash: 4c341ceae0ce22fc32fe70c3a9cfa10a
   TypeTreeHash:
     serializedVersion: 2
     Hash: c279677e67122ef2ce8d98b5df85f726
@@ -30,6 +30,9 @@ ClassTypes:
 - Class: 224
   Script: {instanceID: 0}
 Assets:
+- Assets/AssetBundleResources/UI/Prefabs/Image4.prefab
+- Assets/AssetBundleResources/UI/Prefabs/Image2.prefab
+- Assets/AssetBundleResources/UI/Prefabs/Image1.prefab
+- Assets/AssetBundleResources/UI/Prefabs/Image3.prefab
 - Assets/AssetBundleResources/UI/Prefabs/Canvas.prefab
-Dependencies:
-- F:/Unity/AssetBundleFramework/Assets/StreamingAssets/Windows/ui/prefabs/prefabs2.u3dassetbundle
+Dependencies: []

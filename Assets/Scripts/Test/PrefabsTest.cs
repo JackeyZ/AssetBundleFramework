@@ -1,15 +1,16 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class PrefabsTest : MonoBehaviour
 {
-    AssetBundleFramework.DelAssetLoadComplete LoadCallBackDel;
+    Action<UnityEngine.Object> LoadCallBackDel;
     // Start is called before the first frame update
     void Start()
     {
-        LoadCallBackDel += LoadCallBack;
-        AssetBundleFramework.AssetBundleMgr.GetInstance().LoadBundleAsset("ui/prefabs.u3dassetbundle", "Canvas", LoadCallBackDel);
+        LoadCallBackDel += LoadCallBack;;
+        PrefabLoader.LoadPrefab("ui/prefabs.u3dassetbundle", "Canvas", LoadCallBackDel);
     }
 
     void LoadCallBack(UnityEngine.Object obj)

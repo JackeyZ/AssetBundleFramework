@@ -1,5 +1,5 @@
 ManifestFileVersion: 0
-CRC: 2779099028
+CRC: 2123355427
 AssetBundleManifest:
   AssetBundleInfos:
     Info_0:
@@ -29,8 +29,4 @@ AssetBundleManifest:
       Dependencies: {}
     Info_8:
       Name: ui/prefabs.u3dassetbundle
-      Dependencies:
-        Dependency_0: ui/prefabs/prefabs2.u3dassetbundle
-    Info_9:
-      Name: ui/prefabs/prefabs2.u3dassetbundle
       Dependencies: {}
