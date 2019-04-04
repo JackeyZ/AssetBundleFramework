@@ -34,7 +34,14 @@ namespace AssetBundleFramework
         //AssetBundle 下载地址
         private string _ABDownLoadPath;
 
-        private bool _Loaded = false;
+        private bool _Loading = false;      // 是否正在加载AB包
+
+        private bool _Loaded = false;       // 是否加载成功
+
+        /// <summary>
+        /// 是否加载成功
+        /// </summary>
+        public bool Loaded { get { return _Loaded; } }
 
         /// <summary>
         /// 构造函数
@@ -55,9 +62,9 @@ namespace AssetBundleFramework
         /// <returns></returns>
         public IEnumerator LoadAssetBundle()
         {
-            if(_Loaded == false)
+            if(_Loading == false)
             {
-                _Loaded = true;
+                _Loading = true;
                 UnityWebRequest request = UnityWebRequestAssetBundle.GetAssetBundle(_ABDownLoadPath);
                 yield return request.SendWebRequest();
                 //取得ab的方式1
@@ -66,14 +73,18 @@ namespace AssetBundleFramework
                 AssetBundle ab_prefab = (request.downloadHandler as DownloadHandlerAssetBundle).assetBundle;
                 if (ab_prefab == null)
                 {
-                    _Loaded = false;
+                    _Loading = false;
                     Debug.LogError(GetType() + "LoadAssetBundle失败：" + _ABDownLoadPath);
                     yield return null;
                 }
-                _AssetLoader = new AssetLoader(ab_prefab);
-                if (_LoadCallback != null)
+                else
                 {
-                    _LoadCallback(_ABName);
+                    _Loaded = true;
+                    _AssetLoader = new AssetLoader(ab_prefab);
+                    if (_LoadCallback != null)
+                    {
+                        _LoadCallback(_ABName);
+                    }
                 }
             }
         }
@@ -117,6 +128,8 @@ namespace AssetBundleFramework
             if (_AssetLoader != null)
             {
                 _AssetLoader.Dispose();
+                _Loaded = false;
+                _Loading = false;
                 _AssetLoader = null;
             }
             else
@@ -132,8 +145,9 @@ namespace AssetBundleFramework
         {
             if (_AssetLoader != null)
             {
-                Debug.LogError("DisposeAll");
                 _AssetLoader.DisposeAll();
+                _Loaded = false;
+                _Loading = false;
                 _AssetLoader = null;
             }
             else

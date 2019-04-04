@@ -27,28 +27,25 @@ namespace AssetBundleFramework
         private Dictionary<string, SingleABLoader> _DicSingleABLoaderCache;
         // 当前AB包名称
         private string _CurrentABName;
-        // AB包对应的依赖-引用关系集合
+        // AB包对应的依赖-引用关系集合，同时可用于判断AB包是否已经加载
         private Dictionary<string, ABRelation> _DicABRelation;
         // 所有AB包是否加载完成
-        private DelLoadComplete _LoadAllAssetBundleComplete;
+        private Dictionary<string, DelLoadComplete> _LoadAllAssetBundleCompleteList;
 
         public MultiABMgr(string abName)
         {
             _CurrentABName = abName;
             _DicSingleABLoaderCache = new Dictionary<string, SingleABLoader>();
             _DicABRelation = new Dictionary<string, ABRelation>();
+            _LoadAllAssetBundleCompleteList = new Dictionary<string, DelLoadComplete>();
         }
 
         public void CompleteLoadAB(string abName)
         {
-            // 判断加载完成的是否是当前所需要加载的AB包，如果是则表示AB包以及它依赖的包都加载完成了
-            if (_CurrentABName.Equals(abName))
+            if (_LoadAllAssetBundleCompleteList.ContainsKey(abName))    // 是否有需要回调的函数（目标AB包才会有，一般情况下依赖包不会有所需回调的函数,除非依赖包恰好是目标包）
             {
-                if (_LoadAllAssetBundleComplete != null)
-                {
-                    _LoadAllAssetBundleComplete(abName);
-                    ClearLoadCallBack();
-                }
+                _LoadAllAssetBundleCompleteList[abName](abName);
+                ClearLoadCallBack(abName);
             }
         }
 
@@ -56,7 +53,14 @@ namespace AssetBundleFramework
         {
             if(loadCallback != null)
             {
-                _LoadAllAssetBundleComplete += loadCallback;
+                if (_LoadAllAssetBundleCompleteList.ContainsKey(abName))
+                {
+                    _LoadAllAssetBundleCompleteList[abName] += loadCallback;
+                }
+                else
+                {
+                    _LoadAllAssetBundleCompleteList.Add(abName, loadCallback);
+                }
             }
             // AB包关系的建立
             if (!_DicABRelation.ContainsKey(abName))
@@ -162,22 +166,21 @@ namespace AssetBundleFramework
                 _DicABRelation.Clear();
                 _DicABRelation = null;
                 _CurrentABName = null;
-                _LoadAllAssetBundleComplete = null;
+                _LoadAllAssetBundleCompleteList = null;
 
                 //卸载没有使用到的资源
                 Resources.UnloadUnusedAssets();
                 //强制垃圾收集
                 System.GC.Collect();
             }
-
         }
 
-        private void ClearLoadCallBack()
+        private void ClearLoadCallBack(string abName)
         {
-            Delegate[] delArray = _LoadAllAssetBundleComplete.GetInvocationList();
+            Delegate[] delArray = _LoadAllAssetBundleCompleteList[abName].GetInvocationList();
             for (int i = 0; i < delArray.Length; i++)
             {
-                _LoadAllAssetBundleComplete -= delArray[i] as DelLoadComplete;
+                _LoadAllAssetBundleCompleteList[abName] -= delArray[i] as DelLoadComplete;
             }
         }
     }
