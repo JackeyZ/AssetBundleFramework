@@ -17,7 +17,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ABRelation : MonoBehaviour {
+public class ABRelation {
     private string _ABName;                         //当前AB包名称
     private List<string> _LisAllDependenceAB;       //所有依赖包名称集合
     private List<string> _LisAllReferenceAB;        //所有引用包名称集合

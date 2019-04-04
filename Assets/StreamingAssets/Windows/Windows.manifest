@@ -1,5 +1,5 @@
 ManifestFileVersion: 0
-CRC: 1282122553
+CRC: 2779099028
 AssetBundleManifest:
   AssetBundleInfos:
     Info_0:
@@ -26,4 +26,11 @@ AssetBundleManifest:
         Dependency_0: commonscene/materials.u3dassetbundle
     Info_7:
       Name: ui/images/nopack.u3dassetbundle
+      Dependencies: {}
+    Info_8:
+      Name: ui/prefabs.u3dassetbundle
+      Dependencies:
+        Dependency_0: ui/prefabs/prefabs2.u3dassetbundle
+    Info_9:
+      Name: ui/prefabs/prefabs2.u3dassetbundle
       Dependencies: {}

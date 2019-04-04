@@ -1,0 +1,35 @@
+ManifestFileVersion: 0
+CRC: 24322980
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 851f6d3959fbefe1ce6d97476e0d1a0a
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: c279677e67122ef2ce8d98b5df85f726
+HashAppended: 0
+ClassTypes:
+- Class: 1
+  Script: {instanceID: 0}
+- Class: 114
+  Script: {fileID: 11500000, guid: f12e9230ab37f4848868b3c976e122cc, type: 3}
+- Class: 114
+  Script: {fileID: 1980459831, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+- Class: 114
+  Script: {fileID: 1301386320, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+- Class: 114
+  Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 9c815ae149fb0374fab0d4800ab7c398, type: 3}
+- Class: 115
+  Script: {instanceID: 0}
+- Class: 222
+  Script: {instanceID: 0}
+- Class: 223
+  Script: {instanceID: 0}
+- Class: 224
+  Script: {instanceID: 0}
+Assets:
+- Assets/AssetBundleResources/UI/Prefabs/Canvas.prefab
+Dependencies:
+- F:/Unity/AssetBundleFramework/Assets/StreamingAssets/Windows/ui/prefabs/prefabs2.u3dassetbundle

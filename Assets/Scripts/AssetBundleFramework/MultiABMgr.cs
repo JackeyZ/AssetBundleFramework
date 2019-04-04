@@ -44,6 +44,7 @@ namespace AssetBundleFramework
         {
             if (_LoadAllAssetBundleCompleteList.ContainsKey(abName))    // 是否有需要回调的函数（目标AB包才会有，一般情况下依赖包不会有所需回调的函数,除非依赖包恰好是目标包）
             {
+                Debug.LogError(abName);
                 _LoadAllAssetBundleCompleteList[abName](abName);
                 ClearLoadCallBack(abName);
             }
@@ -78,7 +79,7 @@ namespace AssetBundleFramework
                 // 添加依赖项
                 tempABRelation.AddDependence(depend);
                 // 先加载依赖的AB包并设置被依赖关系
-                yield return LoadReference(depend, abName, loadCallback);
+                yield return LoadReference(depend, abName);
             }
 
             //真正加载AB包
@@ -100,7 +101,7 @@ namespace AssetBundleFramework
         /// <param name="abName">当前包依赖的AB包名称</param>
         /// <param name="refABName">当前的AB包名称</param>
         /// <returns></returns>
-        private IEnumerator LoadReference(string abName, string refABName, DelLoadComplete loadCallback)
+        private IEnumerator LoadReference(string abName, string refABName)
         {
             //如果AB包已经加载
             if (_DicABRelation.ContainsKey(abName))
@@ -115,7 +116,7 @@ namespace AssetBundleFramework
                 _DicABRelation.Add(abName, tmpABRelationObj);
 
                 //开始加载依赖的包(这是一个递归调用)
-                yield return LoadAssetBundle(abName, loadCallback);
+                yield return LoadAssetBundle(abName);
             }
         }
 

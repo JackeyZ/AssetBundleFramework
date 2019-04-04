@@ -100,7 +100,7 @@ namespace AssetBundleFramework
             if (_AssetLoader != null) { 
                 return _AssetLoader.LoadAsset(assetName, isCache);
             }
-            Debug.LogError(GetType() + "/LoadAsset()/ 参数_AssetLoader == null  ,请检查！");
+            Debug.LogError(GetType() + "/LoadAsset()/ 参数_AssetLoader == null  ,请检查！" + _ABName + ":" + assetName);
             return null;
         }
 
