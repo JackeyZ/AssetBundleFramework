@@ -80,7 +80,7 @@ public class AssetLoader : System.IDisposable {
         }
         else if(tmpTResource == null)
         {
-            Debug.LogError(GetType() + "资源：" + assetName + "加载失败请检查");
+            Debug.LogError(GetType() + "资源：" + _CurrentAssetBundle.name + ":" + assetName + "加载失败请检查");
         }
         return tmpTResource;
     }
